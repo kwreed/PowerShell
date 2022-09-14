@@ -3,7 +3,7 @@ Import-Module ActiveDirectory
 
 $OldReports = (Get-Date).AddDays(-60)
 
-Get-ChildItem "C:\Temp\DiskSpaceReport\*.*" |
+Get-ChildItem "C:\Temp\Win10DiskSpaceReport\*.*" |
 Where-Object { $_.LastWriteTime -le $OldReports } |
 Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
 
@@ -26,4 +26,4 @@ $DiskReport = ForEach ($System in $Systems) {
                     @{Label = "Free Space (GB)"; Expression = { "{0:N1}" -f ( $_.Freespace / 1gb ) } },
                     @{Label = 'Free Space (%)'; Expression = { "{0:P0}" -f ($_.Freespace / $_.Size) } } |
 
-                    Export-Csv -Path "C:\Temp\DiskSpaceReport\DiskReport_$logDate.csv" -NoTypeInformation -Delimiter ";"
+                    Export-Csv -Path "C:\Temp\Win10DiskSpaceReport\Win10DiskReport_$logDate.csv" -NoTypeInformation
